@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: prodesk-405
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
