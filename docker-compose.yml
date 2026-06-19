@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:18.4-alpine3.23
+    environment:
+      POSTGRES_USER: unit
+      POSTGRES_PASSWORD: unit
+      POSTGRES_DB: unit
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U unit"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+ 
+  dragonfly:
+    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    ulimits:
+      memlock: -1
+    ports:
+      - "6379:6379"
+    volumes:
+      - dragonflydata:/data
+
+volumes:
+  pgdata:
+  dragonflydata:
+  kafka_data:
