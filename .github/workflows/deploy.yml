@@ -1,0 +1,28 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify Docker information
+        run: |
+          docker info
+          docker compose version
+
+      - name: Stop previous instances
+        run: |
+          docker compose down
+
+      - name: Start services
+        run: |
+          docker compose up -d --build
