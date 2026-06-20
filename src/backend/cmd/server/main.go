@@ -20,7 +20,7 @@ import (
 func main() {
 	slog.SetDefault(slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo})))
 
-	// load .env if it exists — not required
+	// load .env if it exists 
 	_ = godotenv.Load()
 
 	cfg, err := config.Load()
